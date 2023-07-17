@@ -13,7 +13,7 @@ def scan_url(url):
             with open("results.txt", "a") as file:
                 for redirect in response.history:
                     file.write(
-                        f"{redirect.url} {redirect.status_code} -> {response.url}: Перенаправление - поиск сссылки не "
+                        f"{redirect.url} {redirect.status_code} -> {response.url}: Перенаправление - поиск сссылки на "
                         f"сайте\n")
 
         else:
