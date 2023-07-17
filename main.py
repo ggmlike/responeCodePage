@@ -1,6 +1,7 @@
 import time
 import requests
 from requests.exceptions import RequestException, HTTPError
+from tqdm import tqdm
 
 
 def scan_url(url):
@@ -11,7 +12,9 @@ def scan_url(url):
         if response.history:
             with open("results.txt", "a") as file:
                 for redirect in response.history:
-                    file.write(f"{redirect.url} {redirect.status_code} -> {response.url}: Перенаправление - поиск сссылки не сайте\n")
+                    file.write(
+                        f"{redirect.url} {redirect.status_code} -> {response.url}: Перенаправление - поиск сссылки не "
+                        f"сайте\n")
 
         else:
             status_messages = {
@@ -32,9 +35,12 @@ def main():
     with open("dataUrls.txt", "r") as file:
         urls = [url.strip() for url in file]
 
-    for url in urls:
-        scan_url(url)
-        time.sleep(1)
+    total_URLs = len(urls)
+    with tqdm(total=total_URLs, desc="Прогресс") as pbar:
+        for url in urls:
+            scan_url(url)
+            time.sleep(1)
+            pbar.update(1)
 
 
 if __name__ == "__main__":
