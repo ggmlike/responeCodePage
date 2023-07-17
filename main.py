@@ -9,8 +9,10 @@ def scan_url(url):
         status_code = response.status_code
 
         if response.history:
-            for redirect in response.history:
-                print(f"{redirect.url} {redirect.status_code} -> {response.url}: Перенаправление - поиск сссылки не сайте")
+            with open("results.txt", "r") as file:
+                for redirect in response.history:
+                    file.write(f"{redirect.url} {redirect.status_code} -> {response.url}: Перенаправление - поиск сссылки не сайте\n")
+
         else:
             status_messages = {
                 200: "OK",
@@ -18,10 +20,12 @@ def scan_url(url):
                 500: "Код ответ 5** - обратиться к сис.администратору, страницы отправить на переобход"
             }
 
-            print(f"{url}: {status_messages.get(status_code, f'Код ответа {status_code}')}")
+            with open("results.txt", "r") as file:
+                file.write(f"{url}: {status_messages.get(status_code, f'Код ответа {status_code}')}\n")
 
     except (HTTPError, RequestException) as e:
-        print(f"{url} недоступен: {str(e)}")
+        with open("results.txt", "r") as file:
+            file.write(f"{url} недоступен: {str(e)}\n")
 
 
 def main():
@@ -35,3 +39,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    print(f"Проверка завершена, все записи занесены в файл")
