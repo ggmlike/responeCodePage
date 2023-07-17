@@ -35,8 +35,8 @@ def main():
     with open("dataUrls.txt", "r") as file:
         urls = [url.strip() for url in file]
 
-    total_URLs = len(urls)
-    with tqdm(total=total_URLs, desc="Прогресс") as pbar:
+    total_urls = len(urls)
+    with tqdm(total=total_urls, desc="Прогресс") as pbar:
         for url in urls:
             scan_url(url)
             time.sleep(1)
