@@ -1,4 +1,9 @@
 # responeCodePage
+Before running on OS Windows, PowerShell terminal is used, and before execution, 
+it is necessary to set the script execution policy - Set-ExecutionPolicy. Initially, 
+Set-ExecutionPolicy is set to restricted mode. It should be changed to RemoteSigned, 
+and after execution, it should be reverted to Restricted.
+
 Batch scanning of server response codes
 1. install the libary in the project using command - pip install requests / tqdm
 2. create file dataUrls.txt for wrating URLs-address
